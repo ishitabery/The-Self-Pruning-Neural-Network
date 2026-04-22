@@ -14,15 +14,16 @@ This project was built as a case study for AI Engineering, demonstrating advance
 ## 🧮 How It Works
 
 Each weight in the network is multiplied by a learnable gate value between 0 and 1:
-
+```math
 $$\text{gate} = \sigma(\text{gate\_score})$$
-
+```
+```math
 $$\text{pruned\_weight} = \text{weight} \times \text{gate}$$
-
+```
 During training, a custom **L1 Sparsity Loss** is added to the standard Cross-Entropy loss:
-
+```math
 $$\text{Total Loss} = \text{Classification Loss} + \lambda \sum |\text{gate}|$$
-
+```
 Because the L1 derivative is constant, it applies continuous downward pressure on the `gate_scores`. Unless a connection is critical for classification accuracy, its gate will collapse to `0`, effectively pruning the weight from the network. The hyperparameter $$\lambda$$ controls the trade-off between network sparsity and classification accuracy.
 
 ## 🛠️ Installation & Requirements
