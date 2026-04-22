@@ -17,3 +17,9 @@ This project was built as a case study for AI Engineering, demonstrating advance
 Each weight in the network is multiplied by a learnable gate value between 0 and 1:
 ```math
 \text{gate} = \sigma(\text{gate\_score})
+\text{pruned\_weight} = \text{weight} \times \text{gate}
+
+During training, a custom L1 Sparsity Loss is added to the standard Cross-Entropy loss:
+\text{Total Loss} = \text{Classification Loss} + \lambda \sum |\text{gate}|
+
+\text{Total Loss} = \text{Classification Loss} + \lambda \sum |\text{gate}|
